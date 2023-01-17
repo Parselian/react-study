@@ -32,7 +32,7 @@ export default function CounterFn({ min, max }) {
       result = max
     }
 
-    if (isNaN(value) || value === '') {
+    if (isNaN(value) || value === '' || value === '-') {
       result = value
     }
 

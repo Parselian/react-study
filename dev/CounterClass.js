@@ -34,7 +34,7 @@ export default class CounterClass extends React.Component {
       result = this.props.max
     }
 
-    if (isNaN(value) || value === '') {
+    if (isNaN(value) || value === '' || value === '-') {
       result = value
     }
 

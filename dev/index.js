@@ -28,7 +28,7 @@ root.render(
     <hr/>
       <h2>Class counter min=2 max=7</h2>
     <CounterClass min={2} max={7}/>
-      <h2>Class counter min=0 max=4</h2>
+      <h2>Class counter min=-100 max=4</h2>
     <CounterClass min={-100} max={4}/>
     <hr/>
       <h2>Function counter min=1 max=6</h2>
