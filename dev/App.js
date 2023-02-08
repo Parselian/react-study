@@ -4,33 +4,16 @@ import Counter from "./Counter"
 
 export default function () {
   let [products, setProducts] = useState(getProducts())
-  let [totalPrice, setTotalPrice] = useState()
 
-  function getTotalPrice() {
-    let initialVal = 0
-    setTotalPrice(products.reduce((acc, curr) => acc + (curr.cnt * curr.price), initialVal))
-  }
+  const totalPrice = products.reduce((acc, product) => acc + product.cnt * product.price, 0)
 
   function setProductsCnt(id, cnt) {
     setProducts(products.map(product => product.id !== id ? product : {...product, cnt, total: cnt * product.price}))
   }
 
-  function setProductTotal() {
-    setProducts(products.map(product => {return {...product, total: product.cnt * product.price}}))
-  }
-
   function deleteProduct(id) {
     setProducts(products.filter(product => product.id !== id ))
   }
-
-
-  useEffect(() => {
-    setProductTotal()
-  }, [])
-
-  useEffect(() => {
-    getTotalPrice()
-  }, [products])
 
   return (
     <>
@@ -51,16 +34,16 @@ export default function () {
             <td>{i + 1}</td>
             <td>{product.title}</td>
             <td>{product.price}</td>
-            <td><Counter min={1} current={product.cnt} max={product.rest}
-            onBlur={(cnt) => setProductsCnt(product.id, cnt)}/></td>
-            <td>{product.total}</td>
+            <td><Counter min={10} current={product.cnt} max={product.rest}
+            onChange={(cnt) => setProductsCnt(product.id, cnt)}/></td>
+            <td>{product.cnt * product.price}</td>
             <td><button onClick={() => deleteProduct(product.id)}>delete</button></td>
           </tr>
 
         ))}
         <tr>
-          <td>Total:</td>
-          <td>{totalPrice}</td>
+          <td><strong>Total:</strong></td>
+          <td><strong>{totalPrice}</strong></td>
         </tr>
         </tbody>
       </table>
